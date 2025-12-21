@@ -1,3 +1,7 @@
+import jakarta.persistence.*;
+import java.sql.Timestamp;
+
+
 @Entity
 public class BroadcastLog {
     @Id @GeneratedValue

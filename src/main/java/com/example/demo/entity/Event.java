@@ -1,3 +1,8 @@
+import jakarta.persistence.*;
+import java.sql.Timestamp;
+
+
+
 @Entity
 public class Event {
     @Id @GeneratedValue
