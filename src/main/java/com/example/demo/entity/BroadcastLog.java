@@ -1,13 +1,11 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
+@Table(name = "broadcast_logs")
 public class BroadcastLog {
 
     @Id
@@ -15,12 +13,8 @@ public class BroadcastLog {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "subscription_id")
-    private Subscription subscription;
-
-    @ManyToOne
     @JoinColumn(name = "event_update_id")
     private EventUpdate eventUpdate;
 
-    private String status;
+    private String deliveryStatus;
 }

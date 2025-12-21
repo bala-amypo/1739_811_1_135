@@ -1,13 +1,11 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import java.sql.Timestamp;
+import lombok.Data;
 
-@Getter
-@Setter
 @Entity
+@Data
+@Table(name = "events")
 public class Event {
 
     @Id
@@ -17,16 +15,4 @@ public class Event {
     private String title;
 
     private String description;
-
-    private String location;
-
-    private String category;
-
-    private boolean isActive = true;
-
-    @ManyToOne
-    @JoinColumn(name = "publisher_id")
-    private User publisher;
-
-    private Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 }
