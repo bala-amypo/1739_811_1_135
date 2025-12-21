@@ -1,26 +1,22 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import java.sql.Timestamp;
+import lombok.*;
 
+@Entity
 @Getter
 @Setter
-@Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class EventUpdate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String message;
+
     @ManyToOne
-    @JoinColumn(name = "event_id")
-    private Event event;
-
-    private String updateContent;
-
-    private String updateType;
-
-    private Timestamp postedAt = new Timestamp(System.currentTimeMillis());
+    @JoinColumn(name = "user_id")
+    private User user;
 }

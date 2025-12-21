@@ -1,13 +1,13 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import java.sql.Timestamp;
+import lombok.*;
 
+@Entity
 @Getter
 @Setter
-@Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class Subscription {
 
     @Id
@@ -15,12 +15,9 @@ public class Subscription {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "event_id")
-    private Event event;
-
-    private Timestamp subscribedAt = new Timestamp(System.currentTimeMillis());
+    @Column(nullable = false)
+    private String eventType;
 }

@@ -1,13 +1,13 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import java.sql.Timestamp;
+import lombok.*;
 
+@Entity
 @Getter
 @Setter
-@Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class BroadcastLog {
 
     @Id
@@ -15,14 +15,12 @@ public class BroadcastLog {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "subscription_id")
+    private Subscription subscription;
+
+    @ManyToOne
     @JoinColumn(name = "event_update_id")
     private EventUpdate eventUpdate;
 
-    @ManyToOne
-    @JoinColumn(name = "subscriber_id")
-    private User subscriber;
-
-    private String deliveryStatus;
-
-    private Timestamp sentAt = new Timestamp(System.currentTimeMillis());
+    private String status;
 }
