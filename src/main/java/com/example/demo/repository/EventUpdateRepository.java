@@ -1,7 +1,7 @@
-import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.List;
-import java.util.Optional;
+package com.example.demo.repository;
 
-public interface EventUpdateRepository extends JpaRepository<EventUpdate,Long> {
-    List<EventUpdate> findByEventId(Long eventId);
+import com.example.demo.entity.EventUpdate;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EventUpdateRepository extends JpaRepository<EventUpdate, Long> {
 }

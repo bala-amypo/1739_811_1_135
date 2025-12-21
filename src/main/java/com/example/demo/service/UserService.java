@@ -1,20 +1,19 @@
+package com.example.demo.service;
+
+import com.example.demo.entity.User;
+import com.example.demo.repository.UserRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Service
 public class UserService {
-    private final UserRepository repo;
-    private final PasswordEncoder encoder;
 
-    public UserService(UserRepository repo, PasswordEncoder encoder) {
-        this.repo = repo;
-        this.encoder = encoder;
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    public User register(User u) {
-        if (repo.existsByEmail(u.getEmail()))
-            throw new IllegalArgumentException("Email already exists");
-        u.setPassword(encoder.encode(u.getPassword()));
-        return repo.save(u);
+    public User save(User user) {
+        return userRepository.save(user);
     }
 }
