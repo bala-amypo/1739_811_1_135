@@ -1,217 +1,140 @@
-mvn clean compile
-[INFO] Scanning for projects...
-[INFO] 
-[INFO] --------------------------< com.example:demo >--------------------------
-[INFO] Building demo 0.0.1-SNAPSHOT
-[INFO] --------------------------------[ jar ]---------------------------------
-[INFO] 
-[INFO] --- maven-clean-plugin:3.3.2:clean (default-clean) @ demo ---
-[INFO] Deleting /home/coder/Workspace/demo/target
-[INFO] 
-[INFO] --- maven-resources-plugin:3.3.1:resources (default-resources) @ demo ---
-[INFO] Copying 1 resource from src/main/resources to target/classes
-[INFO] Copying 0 resource from src/main/resources to target/classes
-[INFO] 
-[INFO] --- maven-compiler-plugin:3.13.0:compile (default-compile) @ demo ---
-[INFO] Recompiling the module because of changed source code.
-[INFO] Compiling 40 source files with javac [debug parameters release 17] to target/classes
-[INFO] -------------------------------------------------------------
-[ERROR] COMPILATION ERROR : 
-[INFO] -------------------------------------------------------------
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/controller/EventUpdateController.java:[12,8] class EventController is public, should be declared in a file named EventController.java
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/jwtUtil.java:[9,8] class JwtUtil is public, should be declared in a file named JwtUtil.java
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/controller/AuthController.java:[6,32] cannot find symbol
-  symbol:   class AuthService
-  location: package com.example.demo.service
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/controller/AuthController.java:[16,13] cannot find symbol
-  symbol:   class AuthService
-  location: class com.example.demo.controller.AuthController
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetails.java:[4,41] package org.springframework.security.core does not exist
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetails.java:[5,53] package org.springframework.security.core.userdetails does not exist
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetails.java:[10,43] cannot find symbol
-  symbol: class UserDetails
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetails.java:[19,33] cannot find symbol
-  symbol:   class GrantedAuthority
-  location: class com.example.demo.security.CustomUserDetails
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetailsService.java:[6,53] package org.springframework.security.core.userdetails does not exist
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetailsService.java:[7,53] package org.springframework.security.core.userdetails does not exist
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetailsService.java:[8,53] package org.springframework.security.core.userdetails does not exist
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetailsService.java:[12,50] cannot find symbol
-  symbol: class UserDetailsService
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetailsService.java:[18,12] cannot find symbol
-  symbol:   class UserDetails
-  location: class com.example.demo.security.CustomUserDetailsService
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetailsService.java:[19,20] cannot find symbol
-  symbol:   class UsernameNotFoundException
-  location: class com.example.demo.security.CustomUserDetailsService
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/JwtAuthenticationFilter.java:[8,51] package org.springframework.security.authentication does not exist
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/JwtAuthenticationFilter.java:[9,49] package org.springframework.security.core.context does not exist
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/JwtAuthenticationFilter.java:[10,55] package org.springframework.security.web.authentication does not exist
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/jwtUtil.java:[36,13] cannot find symbol
-  symbol:   class Claims
-  location: class com.example.demo.security.JwtUtil
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/jwtUtil.java:[3,1] package io.jsonwebtoken does not exist
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/service/impl/UserServiceImpl.java:[8,52] package org.springframework.security.crypto.password does not exist
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/service/impl/UserServiceImpl.java:[18,13] cannot find symbol
-  symbol:   class PasswordEncoder
-  location: class com.example.demo.service.impl.UserServiceImpl
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/controller/UserController.java:[19,27] cannot find symbol
-  symbol:   method getAllUsers()
-  location: variable userService of type com.example.demo.service.UserService
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/controller/UserController.java:[24,27] cannot find symbol
-  symbol:   method getUserById(java.lang.Long)
-  location: variable userService of type com.example.demo.service.UserService
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetails.java:[18,5] method does not override or implement a method from a supertype
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetails.java:[23,5] method does not override or implement a method from a supertype
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetails.java:[25,20] cannot find symbol
-  symbol:   method getPassword()
-  location: variable user of type com.example.demo.entity.User
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetails.java:[28,5] method does not override or implement a method from a supertype
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetails.java:[30,20] cannot find symbol
-  symbol:   method getEmail()
-  location: variable user of type com.example.demo.entity.User
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetails.java:[33,5] method does not override or implement a method from a supertype
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetails.java:[38,5] method does not override or implement a method from a supertype
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetails.java:[43,5] method does not override or implement a method from a supertype
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetails.java:[48,5] method does not override or implement a method from a supertype
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetailsService.java:[17,5] method does not override or implement a method from a supertype
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetailsService.java:[23,29] cannot find symbol
-  symbol:   class UsernameNotFoundException
-  location: class com.example.demo.security.CustomUserDetailsService
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/JwtAuthenticationFilter.java:[41,17] cannot find symbol
-  symbol:   variable SecurityContextHolder
-  location: class com.example.demo.security.JwtAuthenticationFilter
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/JwtAuthenticationFilter.java:[46,13] cannot find symbol
-  symbol:   class UsernamePasswordAuthenticationToken
-  location: class com.example.demo.security.JwtAuthenticationFilter
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/JwtAuthenticationFilter.java:[47,25] cannot find symbol
-  symbol:   class UsernamePasswordAuthenticationToken
-  location: class com.example.demo.security.JwtAuthenticationFilter
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/JwtAuthenticationFilter.java:[52,33] cannot find symbol
-  symbol:   class WebAuthenticationDetailsSource
-  location: class com.example.demo.security.JwtAuthenticationFilter
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/JwtAuthenticationFilter.java:[53,13] cannot find symbol
-  symbol:   variable SecurityContextHolder
-  location: class com.example.demo.security.JwtAuthenticationFilter
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/jwtUtil.java:[19,27] cannot find symbol
-  symbol:   variable SignatureAlgorithm
-  location: class com.example.demo.security.JwtUtil
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/jwtUtil.java:[15,16] cannot find symbol
-  symbol:   variable Jwts
-  location: class com.example.demo.security.JwtUtil
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/jwtUtil.java:[37,16] cannot find symbol
-  symbol:   variable Jwts
-  location: class com.example.demo.security.JwtUtil
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/service/impl/UserServiceImpl.java:[23,46] cannot find symbol
-  symbol:   method getEmail()
-  location: variable user of type com.example.demo.entity.User
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/service/impl/UserServiceImpl.java:[27,53] cannot find symbol
-  symbol:   method getPassword()
-  location: variable user of type com.example.demo.entity.User
-[INFO] 44 errors 
-[INFO] -------------------------------------------------------------
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  17.900 s
-[INFO] Finished at: 2025-12-26T09:10:36Z
-[INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:compile (default-compile) on project demo: Compilation failure: Compilation failure: 
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/controller/EventUpdateController.java:[12,8] class EventController is public, should be declared in a file named EventController.java
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/jwtUtil.java:[9,8] class JwtUtil is public, should be declared in a file named JwtUtil.java
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/controller/AuthController.java:[6,32] cannot find symbol
-[ERROR]   symbol:   class AuthService
-[ERROR]   location: package com.example.demo.service
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/controller/AuthController.java:[16,13] cannot find symbol
-[ERROR]   symbol:   class AuthService
-[ERROR]   location: class com.example.demo.controller.AuthController
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetails.java:[4,41] package org.springframework.security.core does not exist
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetails.java:[5,53] package org.springframework.security.core.userdetails does not exist
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetails.java:[10,43] cannot find symbol
-[ERROR]   symbol: class UserDetails
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetails.java:[19,33] cannot find symbol
-[ERROR]   symbol:   class GrantedAuthority
-[ERROR]   location: class com.example.demo.security.CustomUserDetails
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetailsService.java:[6,53] package org.springframework.security.core.userdetails does not exist
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetailsService.java:[7,53] package org.springframework.security.core.userdetails does not exist
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetailsService.java:[8,53] package org.springframework.security.core.userdetails does not exist
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetailsService.java:[12,50] cannot find symbol
-[ERROR]   symbol: class UserDetailsService
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetailsService.java:[18,12] cannot find symbol
-[ERROR]   symbol:   class UserDetails
-[ERROR]   location: class com.example.demo.security.CustomUserDetailsService
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetailsService.java:[19,20] cannot find symbol
-[ERROR]   symbol:   class UsernameNotFoundException
-[ERROR]   location: class com.example.demo.security.CustomUserDetailsService
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/JwtAuthenticationFilter.java:[8,51] package org.springframework.security.authentication does not exist
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/JwtAuthenticationFilter.java:[9,49] package org.springframework.security.core.context does not exist
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/JwtAuthenticationFilter.java:[10,55] package org.springframework.security.web.authentication does not exist
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/jwtUtil.java:[36,13] cannot find symbol
-[ERROR]   symbol:   class Claims
-[ERROR]   location: class com.example.demo.security.JwtUtil
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/jwtUtil.java:[3,1] package io.jsonwebtoken does not exist
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/service/impl/UserServiceImpl.java:[8,52] package org.springframework.security.crypto.password does not exist
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/service/impl/UserServiceImpl.java:[18,13] cannot find symbol
-[ERROR]   symbol:   class PasswordEncoder
-[ERROR]   location: class com.example.demo.service.impl.UserServiceImpl
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/controller/UserController.java:[19,27] cannot find symbol
-[ERROR]   symbol:   method getAllUsers()
-[ERROR]   location: variable userService of type com.example.demo.service.UserService
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/controller/UserController.java:[24,27] cannot find symbol
-[ERROR]   symbol:   method getUserById(java.lang.Long)
-[ERROR]   location: variable userService of type com.example.demo.service.UserService
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetails.java:[18,5] method does not override or implement a method from a supertype
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetails.java:[23,5] method does not override or implement a method from a supertype
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetails.java:[25,20] cannot find symbol
-[ERROR]   symbol:   method getPassword()
-[ERROR]   location: variable user of type com.example.demo.entity.User
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetails.java:[28,5] method does not override or implement a method from a supertype
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetails.java:[30,20] cannot find symbol
-[ERROR]   symbol:   method getEmail()
-[ERROR]   location: variable user of type com.example.demo.entity.User
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetails.java:[33,5] method does not override or implement a method from a supertype
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetails.java:[38,5] method does not override or implement a method from a supertype
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetails.java:[43,5] method does not override or implement a method from a supertype
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetails.java:[48,5] method does not override or implement a method from a supertype
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetailsService.java:[17,5] method does not override or implement a method from a supertype
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/CustomUserDetailsService.java:[23,29] cannot find symbol
-[ERROR]   symbol:   class UsernameNotFoundException
-[ERROR]   location: class com.example.demo.security.CustomUserDetailsService
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/JwtAuthenticationFilter.java:[41,17] cannot find symbol
-[ERROR]   symbol:   variable SecurityContextHolder
-[ERROR]   location: class com.example.demo.security.JwtAuthenticationFilter
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/JwtAuthenticationFilter.java:[46,13] cannot find symbol
-[ERROR]   symbol:   class UsernamePasswordAuthenticationToken
-[ERROR]   location: class com.example.demo.security.JwtAuthenticationFilter
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/JwtAuthenticationFilter.java:[47,25] cannot find symbol
-[ERROR]   symbol:   class UsernamePasswordAuthenticationToken
-[ERROR]   location: class com.example.demo.security.JwtAuthenticationFilter
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/JwtAuthenticationFilter.java:[52,33] cannot find symbol
-[ERROR]   symbol:   class WebAuthenticationDetailsSource
-[ERROR]   location: class com.example.demo.security.JwtAuthenticationFilter
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/JwtAuthenticationFilter.java:[53,13] cannot find symbol
-[ERROR]   symbol:   variable SecurityContextHolder
-[ERROR]   location: class com.example.demo.security.JwtAuthenticationFilter
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/jwtUtil.java:[19,27] cannot find symbol
-[ERROR]   symbol:   variable SignatureAlgorithm
-[ERROR]   location: class com.example.demo.security.JwtUtil
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/jwtUtil.java:[15,16] cannot find symbol
-[ERROR]   symbol:   variable Jwts
-[ERROR]   location: class com.example.demo.security.JwtUtil
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/security/jwtUtil.java:[37,16] cannot find symbol
-[ERROR]   symbol:   variable Jwts
-[ERROR]   location: class com.example.demo.security.JwtUtil
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/service/impl/UserServiceImpl.java:[23,46] cannot find symbol
-[ERROR]   symbol:   method getEmail()
-[ERROR]   location: variable user of type com.example.demo.entity.User
-[ERROR] /home/coder/Workspace/demo/src/main/java/com/example/demo/service/impl/UserServiceImpl.java:[27,53] cannot find symbol
-[ERROR]   symbol:   method getPassword()
-[ERROR]   location: variable user of type com.example.demo.entity.User
-[ERROR] -> [Help 1]
-[ERROR] 
-[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR] 
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
-coder@ca6d755e3eb6:~/Workspace/demo$ 
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.3.3</version>
+        <relativePath/>
+    </parent>
+
+    <groupId>com.example</groupId>
+    <artifactId>demo</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>Digital Local Event Broadcasting API</name>
+    <description>Spring Boot REST API with JWT Security</description>
+
+    <properties>
+        <java.version>17</java.version>
+        <jjwt.version>0.11.5</jjwt.version>
+    </properties>
+
+    <dependencies>
+
+        <!-- 🌱 Spring Boot Web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- 🗄️ Spring Data JPA -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!-- 🔐 Spring Security -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- 🔑 JWT -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>${jjwt.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>${jjwt.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- 🛢️ MariaDB Driver -->
+        <dependency>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>3.3.3</version>
+        </dependency>
+
+        <!-- ✅ Validation -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <!-- 📄 Swagger / OpenAPI -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.5.0</version>
+        </dependency>
+
+        <!-- 🧩 Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- 🧪 TestNG -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.9.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- 🧪 Spring Boot Test -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <!-- 🚀 Spring Boot Plugin -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <!-- 🧪 Surefire for TestNG -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
