@@ -3,8 +3,8 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Entity
 @Data
+@Entity
 @Table(name = "events")
 public class Event {
 
@@ -12,7 +12,6 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
-
+    private String name;
     private String description;
 }

@@ -3,8 +3,8 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Entity
 @Data
+@Entity
 @Table(name = "broadcast_logs")
 public class BroadcastLog {
 
@@ -12,9 +12,9 @@ public class BroadcastLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String deliveryStatus; // SUCCESS / FAILED
+    private String message;
 
     @ManyToOne
-    @JoinColumn(name = "event_update_id")
-    private EventUpdate eventUpdate;
+    @JoinColumn(name = "event_id")
+    private Event event;
 }
