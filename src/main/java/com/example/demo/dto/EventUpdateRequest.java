@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class EventUpdateRequest {
-
-    private String message;
+    private Long eventId;
+    private String updateMessage;
 }

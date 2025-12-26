@@ -3,8 +3,8 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Entity
 @Data
+@Entity
 @Table(name = "event_updates")
 public class EventUpdate {
 
@@ -12,7 +12,7 @@ public class EventUpdate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String message;
+    private String updateMessage;
 
     @ManyToOne
     @JoinColumn(name = "event_id")
