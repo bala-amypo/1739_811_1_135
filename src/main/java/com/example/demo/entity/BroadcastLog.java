@@ -12,9 +12,9 @@ public class BroadcastLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String deliveryStatus; // SUCCESS / FAILED
+
     @ManyToOne
     @JoinColumn(name = "event_update_id")
     private EventUpdate eventUpdate;
-
-    private String deliveryStatus;
 }

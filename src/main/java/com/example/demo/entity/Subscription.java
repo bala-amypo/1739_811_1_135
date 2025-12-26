@@ -12,9 +12,9 @@ public class Subscription {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String channel; // EMAIL / SMS / PUSH
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-    private String channel;
 }
