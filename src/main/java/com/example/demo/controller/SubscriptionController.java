@@ -1,44 +1,31 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Subscription;
-import com.example.demo.repository.SubscriptionRepository;
+import com.example.demo.service.SubscriptionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/subscriptions")
+@RequestMapping("/api/subscriptions")
 public class SubscriptionController {
 
-    private final SubscriptionRepository subscriptionRepository;
-
-    public SubscriptionController(SubscriptionRepository subscriptionRepository) {
-        this.subscriptionRepository = subscriptionRepository;
-    }
+    @Autowired
+    private SubscriptionService subscriptionService;
 
     @PostMapping
-    public Subscription create(@RequestBody Subscription subscription) {
-        return subscriptionRepository.save(subscription);
+    public Subscription createSubscription(@RequestBody Subscription subscription) {
+        return subscriptionService.createSubscription(subscription);
     }
 
     @GetMapping
-    public List<Subscription> getAll() {
-        return subscriptionRepository.findAll();
+    public List<Subscription> getAllSubscriptions() {
+        return subscriptionService.getAllSubscriptions();
     }
 
     @GetMapping("/{id}")
-    public Subscription getById(@PathVariable Long id) {
-        return subscriptionRepository.findById(id).orElse(null);
-    }
-
-    @PutMapping("/{id}")
-    public Subscription update(@PathVariable Long id, @RequestBody Subscription subscription) {
-        subscription.setId(id);
-        return subscriptionRepository.save(subscription);
-    }
-
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        subscriptionRepository.deleteById(id);
+    public Subscription getSubscriptionById(@PathVariable Long id) {
+        return subscriptionService.getSubscriptionById(id);
     }
 }

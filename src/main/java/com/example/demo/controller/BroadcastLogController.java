@@ -1,44 +1,31 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.BroadcastLog;
-import com.example.demo.repository.BroadcastLogRepository;
+import com.example.demo.service.BroadcastLogService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/broadcast-logs")
+@RequestMapping("/api/broadcast-logs")
 public class BroadcastLogController {
 
-    private final BroadcastLogRepository broadcastLogRepository;
-
-    public BroadcastLogController(BroadcastLogRepository broadcastLogRepository) {
-        this.broadcastLogRepository = broadcastLogRepository;
-    }
+    @Autowired
+    private BroadcastLogService broadcastLogService;
 
     @PostMapping
-    public BroadcastLog create(@RequestBody BroadcastLog log) {
-        return broadcastLogRepository.save(log);
+    public BroadcastLog createBroadcastLog(@RequestBody BroadcastLog broadcastLog) {
+        return broadcastLogService.createBroadcastLog(broadcastLog);
     }
 
     @GetMapping
-    public List<BroadcastLog> getAll() {
-        return broadcastLogRepository.findAll();
+    public List<BroadcastLog> getAllBroadcastLogs() {
+        return broadcastLogService.getAllBroadcastLogs();
     }
 
     @GetMapping("/{id}")
-    public BroadcastLog getById(@PathVariable Long id) {
-        return broadcastLogRepository.findById(id).orElse(null);
-    }
-
-    @PutMapping("/{id}")
-    public BroadcastLog update(@PathVariable Long id, @RequestBody BroadcastLog log) {
-        log.setId(id);
-        return broadcastLogRepository.save(log);
-    }
-
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
-        broadcastLogRepository.deleteById(id);
+    public BroadcastLog getBroadcastLogById(@PathVariable Long id) {
+        return broadcastLogService.getBroadcastLogById(id);
     }
 }
