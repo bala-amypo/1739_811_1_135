@@ -2,30 +2,27 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Subscription;
 import com.example.demo.service.SubscriptionService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/subscriptions")
+@RequestMapping("/subscriptions")
 public class SubscriptionController {
 
-    @Autowired
-    private SubscriptionService subscriptionService;
+    private final SubscriptionService subscriptionService;
+
+    public SubscriptionController(SubscriptionService subscriptionService) {
+        this.subscriptionService = subscriptionService;
+    }
 
     @PostMapping
-    public Subscription createSubscription(@RequestBody Subscription subscription) {
-        return subscriptionService.createSubscription(subscription);
+    public Subscription create(@RequestBody Subscription subscription) {
+        return subscriptionService.saveSubscription(subscription);
     }
 
-    @GetMapping
-    public List<Subscription> getAllSubscriptions() {
-        return subscriptionService.getAllSubscriptions();
-    }
-
-    @GetMapping("/{id}")
-    public Subscription getSubscriptionById(@PathVariable Long id) {
-        return subscriptionService.getSubscriptionById(id);
+    @GetMapping("/user/{userId}")
+    public List<Subscription> getByUser(@PathVariable Long userId) {
+        return subscriptionService.getSubscriptionsByUserId(userId);
     }
 }

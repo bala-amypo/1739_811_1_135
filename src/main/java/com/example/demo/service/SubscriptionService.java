@@ -4,10 +4,6 @@ import com.example.demo.entity.Subscription;
 import java.util.List;
 
 public interface SubscriptionService {
-
-    Subscription createSubscription(Subscription subscription);
-
-    List<Subscription> getAllSubscriptions();
-
-    Subscription getSubscriptionById(Long id);
+    Subscription saveSubscription(Subscription subscription);
+    List<Subscription> getSubscriptionsByUserId(Long userId);
 }
