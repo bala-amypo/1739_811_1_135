@@ -1,17 +1,11 @@
 package com.example.demo.dto;
 
-public class AuthRequest {
+public class LoginRequestDto {
 
     private String email;
     private String password;
 
-    public AuthRequest() {
-    }
-
-    public AuthRequest(String email, String password) {
-        this.email = email;
-        this.password = password;
-    }
+    public LoginRequestDto() {}
 
     public String getEmail() {
         return email;

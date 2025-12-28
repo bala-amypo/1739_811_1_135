@@ -1,23 +1,22 @@
 package com.example.demo.dto;
 
-public class EventRequest {
+public class EventResponseDto {
 
+    private Long id;
     private String title;
     private String description;
     private String location;
     private String category;
-    private Long publisherId;
+    private boolean active;
 
-    public EventRequest() {
+    public EventResponseDto() {}
+
+    public Long getId() {
+        return id;
     }
 
-    public EventRequest(String title, String description, String location,
-                        String category, Long publisherId) {
-        this.title = title;
-        this.description = description;
-        this.location = location;
-        this.category = category;
-        this.publisherId = publisherId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -52,11 +51,11 @@ public class EventRequest {
         this.category = category;
     }
 
-    public Long getPublisherId() {
-        return publisherId;
+    public boolean isActive() {
+        return active;
     }
 
-    public void setPublisherId(Long publisherId) {
-        this.publisherId = publisherId;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
