@@ -1,14 +1,29 @@
 package com.example.demo.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class EventRequestDto {
 
+    @NotBlank
     private String title;
-    private String description;
-    private String location;
-    private String category;
-    private Long publisherId;
 
-    public EventRequestDto() {}
+    @NotBlank
+    private String description;
+
+    @NotBlank
+    private String location;
+
+    private String category;
+
+    public EventRequestDto() {
+    }
+
+    public EventRequestDto(String title, String description, String location, String category) {
+        this.title = title;
+        this.description = description;
+        this.location = location;
+        this.category = category;
+    }
 
     public String getTitle() {
         return title;
@@ -40,13 +55,5 @@ public class EventRequestDto {
 
     public void setCategory(String category) {
         this.category = category;
-    }
-
-    public Long getPublisherId() {
-        return publisherId;
-    }
-
-    public void setPublisherId(Long publisherId) {
-        this.publisherId = publisherId;
     }
 }

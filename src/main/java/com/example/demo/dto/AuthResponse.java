@@ -1,14 +1,15 @@
 package com.example.demo.dto;
 
-public class LoginResponseDto {
+public class AuthResponse {
 
     private String token;
     private Long userId;
     private String role;
 
-    public LoginResponseDto() {}
+    public AuthResponse() {
+    }
 
-    public LoginResponseDto(String token, Long userId, String role) {
+    public AuthResponse(String token, Long userId, String role) {
         this.token = token;
         this.userId = userId;
         this.role = role;
