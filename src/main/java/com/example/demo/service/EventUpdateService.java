@@ -5,13 +5,13 @@ import java.util.List;
 
 public interface EventUpdateService {
 
-    EventUpdate createUpdate(EventUpdate update);
-
-    List<EventUpdate> getUpdatesForEvent(Long eventId);
+    EventUpdate publishUpdate(EventUpdate update);
 
     EventUpdate getById(Long id);
 
-    // 🔧 Required by controllers
+    List<EventUpdate> getUpdatesForEvent(Long eventId);
+
+    // REQUIRED BY CONTROLLER
     List<EventUpdate> getAllUpdates();
 
     EventUpdate getUpdateById(Long id);
