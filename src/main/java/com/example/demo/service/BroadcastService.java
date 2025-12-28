@@ -4,12 +4,8 @@ import com.example.demo.entity.BroadcastLog;
 import java.util.List;
 
 public interface BroadcastService {
-
     void broadcastUpdate(Long updateId);
-
     List<BroadcastLog> getLogsForUpdate(Long updateId);
-
-    List<BroadcastLog> getAllLogs();   // REQUIRED by controller
-
-    void recordDelivery(Long updateId, Long subscriberId, boolean success);
+    void recordDelivery(Long updateId, Long subscriberId, boolean successful);
+    List<BroadcastLog> getAllLogs();
 }
