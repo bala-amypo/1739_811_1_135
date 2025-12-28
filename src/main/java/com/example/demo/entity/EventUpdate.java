@@ -2,7 +2,6 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import java.time.Instant;
-import java.util.List;
 
 @Entity
 @Table(name = "event_updates")
@@ -12,9 +11,15 @@ public class EventUpdate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_id", nullable = false)
+    private Event event;
+
+    @Column(nullable = false)
     private String updateContent;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private UpdateType updateType;
 
     private Instant timestamp;
@@ -22,20 +27,15 @@ public class EventUpdate {
     @Enumerated(EnumType.STRING)
     private SeverityLevel severityLevel;
 
-    @ManyToOne
-    @JoinColumn(name = "event_id")
-    private Event event;
-
-    @OneToMany(mappedBy = "eventUpdate")
-    private List<BroadcastLog> logs;
-
     public EventUpdate() {}
 
-    public EventUpdate(Long id, String updateContent, UpdateType updateType, Event event) {
+    public EventUpdate(Long id, Event event, String updateContent, UpdateType updateType, Instant timestamp, SeverityLevel severityLevel) {
         this.id = id;
+        this.event = event;
         this.updateContent = updateContent;
         this.updateType = updateType;
-        this.event = event;
+        this.timestamp = timestamp;
+        this.severityLevel = severityLevel;
     }
 
     @PrePersist
@@ -46,21 +46,51 @@ public class EventUpdate {
         }
     }
 
-    // Getters & Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getUpdateContent() { return updateContent; }
-    public void setUpdateContent(String updateContent) { this.updateContent = updateContent; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public UpdateType getUpdateType() { return updateType; }
-    public void setUpdateType(UpdateType updateType) { this.updateType = updateType; }
+    public Event getEvent() {
+        return event;
+    }
 
-    public Instant getTimestamp() { return timestamp; }
+    public void setEvent(Event event) {
+        this.event = event;
+    }
 
-    public SeverityLevel getSeverityLevel() { return severityLevel; }
-    public void setSeverityLevel(SeverityLevel severityLevel) { this.severityLevel = severityLevel; }
+    public String getUpdateContent() {
+        return updateContent;
+    }
 
-    public Event getEvent() { return event; }
-    public void setEvent(Event event) { this.event = event; }
+    public void setUpdateContent(String updateContent) {
+        this.updateContent = updateContent;
+    }
+
+    public UpdateType getUpdateType() {
+        return updateType;
+    }
+
+    public void setUpdateType(UpdateType updateType) {
+        this.updateType = updateType;
+    }
+
+    public Instant getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Instant timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public SeverityLevel getSeverityLevel() {
+        return severityLevel;
+    }
+
+    public void setSeverityLevel(SeverityLevel severityLevel) {
+        this.severityLevel = severityLevel;
+    }
 }

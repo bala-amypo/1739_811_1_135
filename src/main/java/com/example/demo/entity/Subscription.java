@@ -4,32 +4,32 @@ import jakarta.persistence.*;
 import java.time.Instant;
 
 @Entity
-@Table(
-    name = "subscriptions",
-    uniqueConstraints = @UniqueConstraint(columnNames = {"user_id", "event_id"})
-)
+@Table(name = "subscriptions", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"user_id", "event_id"})
+})
 public class Subscription {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Instant subscribedAt;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "event_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "event_id", nullable = false)
     private Event event;
+
+    private Instant subscribedAt;
 
     public Subscription() {}
 
-    public Subscription(Long id, User user, Event event) {
+    public Subscription(Long id, User user, Event event, Instant subscribedAt) {
         this.id = id;
         this.user = user;
         this.event = event;
+        this.subscribedAt = subscribedAt;
     }
 
     @PrePersist
@@ -37,14 +37,35 @@ public class Subscription {
         this.subscribedAt = Instant.now();
     }
 
-    // Getters & Setters
-    public Long getId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
-    public Instant getSubscribedAt() { return subscribedAt; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public User getUser() { return user; }
-    public void setUser(User user) { this.user = user; }
+    public User getUser() {
+        return user;
+    }
 
-    public Event getEvent() { return event; }
-    public void setEvent(Event event) { this.event = event; }
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    public Instant getSubscribedAt() {
+        return subscribedAt;
+    }
+
+    public void setSubscribedAt(Instant subscribedAt) {
+        this.subscribedAt = subscribedAt;
+    }
 }
