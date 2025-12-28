@@ -2,16 +2,13 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.EventUpdate;
 import com.example.demo.service.EventUpdateService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name = "EventUpdate")
 @RestController
-@RequestMapping("/api/updates")
+@RequestMapping("/api/event-updates")
 public class EventUpdateController {
 
     private final EventUpdateService service;
@@ -20,27 +17,31 @@ public class EventUpdateController {
         this.service = service;
     }
 
-    @Operation(summary = "Publish update")
+    // Publish a new update
     @PostMapping
-    public ResponseEntity<EventUpdate> publish(@RequestBody EventUpdate update) {
-        return ResponseEntity.status(201).body(service.publishUpdate(update));
+    public ResponseEntity<EventUpdate> publishUpdate(@RequestBody EventUpdate update) {
+        EventUpdate saved = service.createUpdate(update); // call the correct service method
+        return ResponseEntity.ok(saved);
     }
 
-    @Operation(summary = "Get updates for event")
-    @GetMapping("/event/{eventId}")
-    public ResponseEntity<List<EventUpdate>> getByEvent(@PathVariable Long eventId) {
-        return ResponseEntity.ok(service.getUpdatesForEvent(eventId));
-    }
-
-    @Operation(summary = "Get update by id")
+    // Get update by ID
     @GetMapping("/{id}")
-    public ResponseEntity<EventUpdate> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(service.getUpdateById(id).orElseThrow());
+    public ResponseEntity<EventUpdate> getUpdateById(@PathVariable Long id) {
+        EventUpdate update = service.getUpdateById(id); // call the service
+        return ResponseEntity.ok(update);
     }
 
-    @Operation(summary = "Get all updates")
+    // Get all updates
     @GetMapping
-    public ResponseEntity<List<EventUpdate>> getAll() {
-        return ResponseEntity.ok(service.getAllUpdates());
+    public ResponseEntity<List<EventUpdate>> getAllUpdates() {
+        List<EventUpdate> updates = service.getAllUpdates();
+        return ResponseEntity.ok(updates);
+    }
+
+    // Get all updates for a specific event
+    @GetMapping("/event/{eventId}")
+    public ResponseEntity<List<EventUpdate>> getUpdatesForEvent(@PathVariable Long eventId) {
+        List<EventUpdate> updates = service.getUpdatesForEvent(eventId);
+        return ResponseEntity.ok(updates);
     }
 }
