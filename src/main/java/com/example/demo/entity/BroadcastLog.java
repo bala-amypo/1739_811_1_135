@@ -1,10 +1,8 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "broadcast_logs")
 public class BroadcastLog {
 
     @Id
@@ -12,38 +10,41 @@ public class BroadcastLog {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "event_update_id", nullable = false)
+    @JoinColumn(name = "event_update_id")
     private EventUpdate eventUpdate;
 
     @ManyToOne
-    @JoinColumn(name = "subscriber_id", nullable = false)
-    private User subscriber;
+    @JoinColumn(name = "subscriber_id")
+    private User user;
 
-    @Column(nullable = false)
     private String deliveryStatus;
 
-    @Column(nullable = false)
-    private LocalDateTime sentAt;
+    // ✅ Default constructor
+    public BroadcastLog() {}
 
-    public BroadcastLog() {
-    }
-
-    public BroadcastLog(Long id, EventUpdate eventUpdate, User subscriber,
-                        String deliveryStatus, LocalDateTime sentAt) {
+    // ✅ Parameterized constructor
+    public BroadcastLog(Long id, EventUpdate eventUpdate,
+                        User user, String deliveryStatus) {
         this.id = id;
         this.eventUpdate = eventUpdate;
-        this.subscriber = subscriber;
+        this.user = user;
         this.deliveryStatus = deliveryStatus;
-        this.sentAt = sentAt;
     }
 
-    @PrePersist
-    public void prePersist() {
-        this.sentAt = LocalDateTime.now();
-        if (this.deliveryStatus == null) {
-            this.deliveryStatus = "SENT";
-        }
+    // ✅ REQUIRED setters (tests call these)
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public EventUpdate getEventUpdate() { return eventUpdate; }
+    public void setEventUpdate(EventUpdate eventUpdate) {
+        this.eventUpdate = eventUpdate;
     }
 
-    // Getters and Setters
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
+
+    public String getDeliveryStatus() { return deliveryStatus; }
+    public void setDeliveryStatus(String deliveryStatus) {
+        this.deliveryStatus = deliveryStatus;
+    }
 }

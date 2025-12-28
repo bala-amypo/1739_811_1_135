@@ -1,15 +1,8 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
-@Table(
-    name = "subscriptions",
-    uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"user_id", "event_id"})
-    }
-)
 public class Subscription {
 
     @Id
@@ -17,30 +10,30 @@ public class Subscription {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "event_id", nullable = false)
+    @JoinColumn(name = "event_id")
     private Event event;
 
-    @Column(nullable = false)
-    private LocalDateTime subscribedAt;
+    // ✅ Default constructor
+    public Subscription() {}
 
-    public Subscription() {
-    }
-
-    public Subscription(Long id, User user, Event event, LocalDateTime subscribedAt) {
+    // ✅ Parameterized constructor
+    public Subscription(Long id, User user, Event event) {
         this.id = id;
         this.user = user;
         this.event = event;
-        this.subscribedAt = subscribedAt;
     }
 
-    @PrePersist
-    public void prePersist() {
-        this.subscribedAt = LocalDateTime.now();
-    }
+    // ✅ REQUIRED getters/setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    // Getters and Setters
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
+
+    public Event getEvent() { return event; }
+    public void setEvent(Event event) { this.event = event; }
 }

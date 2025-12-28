@@ -2,10 +2,8 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
-@Table(name = "event_updates")
 public class EventUpdate {
 
     @Id
@@ -13,44 +11,38 @@ public class EventUpdate {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "event_id", nullable = false)
+    @JoinColumn(name = "event_id")
     private Event event;
 
-    @Column(nullable = false)
-    private String updateContent;
-
-    @Column(nullable = false)
-    private String updateType;
-
-    @Column(nullable = false)
+    private String updateMessage;
     private LocalDateTime timestamp;
 
-    @Column(nullable = false)
-    private String severityLevel;
+    // ✅ Default constructor
+    public EventUpdate() {}
 
-    @OneToMany(mappedBy = "eventUpdate", cascade = CascadeType.ALL)
-    private List<BroadcastLog> broadcastLogs;
-
-    public EventUpdate() {
-    }
-
-    public EventUpdate(Long id, Event event, String updateContent,
-                       String updateType, LocalDateTime timestamp, String severityLevel) {
+    // ✅ Parameterized constructor
+    public EventUpdate(Long id, Event event,
+                       String updateMessage, LocalDateTime timestamp) {
         this.id = id;
         this.event = event;
-        this.updateContent = updateContent;
-        this.updateType = updateType;
+        this.updateMessage = updateMessage;
         this.timestamp = timestamp;
-        this.severityLevel = severityLevel;
     }
 
-    @PrePersist
-    public void prePersist() {
-        this.timestamp = LocalDateTime.now();
-        if (this.severityLevel == null) {
-            this.severityLevel = "LOW";
-        }
+    // ✅ REQUIRED methods
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public Event getEvent() { return event; }
+    public void setEvent(Event event) { this.event = event; }
+
+    public String getUpdateMessage() { return updateMessage; }
+    public void setUpdateMessage(String updateMessage) {
+        this.updateMessage = updateMessage;
     }
 
-    // Getters and Setters
+    public LocalDateTime getTimestamp() { return timestamp; }
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
 }
