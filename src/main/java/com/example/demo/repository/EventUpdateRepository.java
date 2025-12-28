@@ -1,9 +1,13 @@
 package com.example.demo.repository;
 
-import com.example.demo.entity.*;
-import java.util.*;
+import com.example.demo.entity.EventUpdate;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface EventUpdateRepository {
-    Optional<EventUpdate> findById(Long id);
-    List<EventUpdate> findByEventIdOrderByTimestampAsc(Long id);
+import java.util.List;
+
+public interface EventUpdateRepository extends JpaRepository<EventUpdate, Long> {
+
+    List<EventUpdate> findByEventId(Long eventId);
+
+    List<EventUpdate> findByEventIdOrderByTimestampAsc(Long eventId);
 }
