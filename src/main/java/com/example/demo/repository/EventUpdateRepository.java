@@ -1,18 +1,9 @@
 package com.example.demo.repository;
 
-import com.example.demo.entity.EventUpdate;
-import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.demo.entity.*;
+import java.util.*;
 
-import java.util.List;
-import java.util.Optional;
-
-public interface EventUpdateRepository extends JpaRepository<EventUpdate, Long> {
-
-    List<EventUpdate> findByEventId(Long eventId);
-
-    List<EventUpdate> findByEventIdOrderByTimestampAsc(Long eventId);
-
+public interface EventUpdateRepository {
     Optional<EventUpdate> findById(Long id);
-
-    List<EventUpdate> findAll();
+    List<EventUpdate> findByEventIdOrderByTimestampAsc(Long id);
 }
