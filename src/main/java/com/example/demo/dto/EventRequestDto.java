@@ -1,8 +1,9 @@
 package com.example.demo.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-public class EventRequestDto {
+public class EventRequest {
 
     @NotBlank
     private String title;
@@ -13,16 +14,20 @@ public class EventRequestDto {
     @NotBlank
     private String location;
 
+    @NotBlank
     private String category;
 
-    public EventRequestDto() {
-    }
+    @NotNull
+    private Long publisherId;
 
-    public EventRequestDto(String title, String description, String location, String category) {
+    public EventRequest() {}
+
+    public EventRequest(String title, String description, String location, String category, Long publisherId) {
         this.title = title;
         this.description = description;
         this.location = location;
         this.category = category;
+        this.publisherId = publisherId;
     }
 
     public String getTitle() {
@@ -55,5 +60,13 @@ public class EventRequestDto {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public Long getPublisherId() {
+        return publisherId;
+    }
+
+    public void setPublisherId(Long publisherId) {
+        this.publisherId = publisherId;
     }
 }

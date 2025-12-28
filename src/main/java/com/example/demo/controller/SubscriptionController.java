@@ -1,60 +1,71 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Subscription;
+import com.example.demo.entity.User;
 import com.example.demo.service.SubscriptionService;
+import com.example.demo.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name = "Subscription")
 @RestController
 @RequestMapping("/api/subscriptions")
+@Tag(name = "Subscription", description = "Subscription management endpoints")
 public class SubscriptionController {
 
-    private final SubscriptionService service;
+    private final SubscriptionService subscriptionService;
+    private final UserService userService;
 
-    public SubscriptionController(SubscriptionService service) {
-        this.service = service;
+    public SubscriptionController(SubscriptionService subscriptionService, UserService userService) {
+        this.subscriptionService = subscriptionService;
+        this.userService = userService;
     }
 
-    @Operation(summary = "Subscribe")
+    private Long getCurrentUserId(Authentication authentication) {
+        String email = authentication.getName();
+        User user = userService.findByEmail(email);
+        return user.getId();
+    }
+
     @PostMapping("/{eventId}")
-    public ResponseEntity<Subscription> subscribe(
-            @PathVariable Long eventId,
-            @RequestParam Long userId) {
-        return ResponseEntity.status(201)
-                .body(service.subscribe(userId, eventId));
+    @PreAuthorize("hasAuthority('SUBSCRIBER')")
+    @Operation(summary = "Subscribe to event")
+    public ResponseEntity<Subscription> subscribe(@PathVariable Long eventId, Authentication authentication) {
+        Long userId = getCurrentUserId(authentication);
+        return new ResponseEntity<>(subscriptionService.subscribe(userId, eventId), HttpStatus.CREATED);
     }
 
-    @Operation(summary = "Unsubscribe")
     @DeleteMapping("/{eventId}")
-    public ResponseEntity<Void> unsubscribe(
-            @PathVariable Long eventId,
-            @RequestParam Long userId) {
-        service.unsubscribe(userId, eventId);
-        return ResponseEntity.ok().build();
+    @PreAuthorize("hasAuthority('SUBSCRIBER')")
+    @Operation(summary = "Unsubscribe from event")
+    public ResponseEntity<Void> unsubscribe(@PathVariable Long eventId, Authentication authentication) {
+        Long userId = getCurrentUserId(authentication);
+        subscriptionService.unsubscribe(userId, eventId);
+        return ResponseEntity.noContent().build();
     }
 
-    @Operation(summary = "User subscriptions")
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<Subscription>> userSubs(@PathVariable Long userId) {
-        return ResponseEntity.ok(service.getUserSubscriptions(userId));
+    @Operation(summary = "Get user subscriptions")
+    public ResponseEntity<List<Subscription>> getUserSubscriptions(@PathVariable Long userId) {
+        return ResponseEntity.ok(subscriptionService.getUserSubscriptions(userId));
     }
 
-    @Operation(summary = "Check subscription")
     @GetMapping("/check/{userId}/{eventId}")
-    public ResponseEntity<Boolean> check(
-            @PathVariable Long userId,
-            @PathVariable Long eventId) {
-        return ResponseEntity.ok(service.isSubscribed(userId, eventId));
+    @Operation(summary = "Check subscription status")
+    public ResponseEntity<Boolean> isSubscribed(@PathVariable Long userId, @PathVariable Long eventId) {
+        return ResponseEntity.ok(subscriptionService.isSubscribed(userId, eventId));
     }
 
-    @Operation(summary = "All subscriptions")
-    @GetMapping
-    public ResponseEntity<List<Subscription>> all() {
-        return ResponseEntity.ok(service.getAllSubscriptions());
+    @GetMapping("/")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @Operation(summary = "Get all subscriptions (Admin)")
+    public ResponseEntity<List<Subscription>> getAllSubscriptions() {
+        return ResponseEntity.ok(subscriptionService.getAllSubscriptions());
     }
 }

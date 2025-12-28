@@ -5,37 +5,40 @@ import com.example.demo.service.BroadcastService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Tag(name = "Broadcast")
 @RestController
 @RequestMapping("/api/broadcasts")
+@Tag(name = "Broadcast", description = "Broadcast management endpoints")
 public class BroadcastController {
 
-    private final BroadcastService service;
+    private final BroadcastService broadcastService;
 
-    public BroadcastController(BroadcastService service) {
-        this.service = service;
+    public BroadcastController(BroadcastService broadcastService) {
+        this.broadcastService = broadcastService;
     }
 
-    @Operation(summary = "Trigger broadcast")
     @PostMapping("/trigger/{updateId}")
-    public ResponseEntity<Void> trigger(@PathVariable Long updateId) {
-        service.broadcastUpdate(updateId);
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @Operation(summary = "Trigger broadcast (Admin)")
+    public ResponseEntity<Void> triggerBroadcast(@PathVariable Long updateId) {
+        broadcastService.broadcastUpdate(updateId);
         return ResponseEntity.ok().build();
     }
 
-    @Operation(summary = "Logs for update")
     @GetMapping("/logs/{updateId}")
-    public ResponseEntity<List<BroadcastLog>> logs(@PathVariable Long updateId) {
-        return ResponseEntity.ok(service.getLogsForUpdate(updateId));
+    @Operation(summary = "Get logs for update")
+    public ResponseEntity<List<BroadcastLog>> getLogsForUpdate(@PathVariable Long updateId) {
+        return ResponseEntity.ok(broadcastService.getLogsForUpdate(updateId));
     }
 
-    @Operation(summary = "All logs")
-    @GetMapping
-    public ResponseEntity<List<BroadcastLog>> all() {
-        return ResponseEntity.ok(service.getAllLogs());
+    @GetMapping("/")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @Operation(summary = "Get all broadcast logs (Admin)")
+    public ResponseEntity<List<BroadcastLog>> getAllLogs() {
+        return ResponseEntity.ok(broadcastService.getAllLogs());
     }
 }
