@@ -1,14 +1,16 @@
 package com.example.demo.service;
 
-import org.springframework.stereotype.Service;
+import com.example.demo.entity.BroadcastLog;
 
-@Service
-public class BroadcastService {
+import java.util.List;
 
-    public String broadcastMessage(String message) {
-        if (message == null || message.isBlank()) {
-            return "No message provided";
-        }
-        return "Broadcasted: " + message;
-    }
+public interface BroadcastService {
+
+    void broadcastUpdate(Long updateId);
+
+    List<BroadcastLog> getLogsForUpdate(Long updateId);
+
+    void recordDelivery(Long updateId, Long subscriberId, boolean successful);
+
+    List<BroadcastLog> getAllLogs();
 }

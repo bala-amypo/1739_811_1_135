@@ -2,32 +2,49 @@ package com.example.demo.service.impl;
 
 import com.example.demo.entity.EventUpdate;
 import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.repository.EventRepository;
 import com.example.demo.repository.EventUpdateRepository;
+import com.example.demo.service.BroadcastService;
 import com.example.demo.service.EventUpdateService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EventUpdateServiceImpl implements EventUpdateService {
 
-    @Autowired
-    private EventUpdateRepository eventUpdateRepository;
+    private final EventUpdateRepository eventUpdateRepository;
+    private final EventRepository eventRepository;
+    private final BroadcastService broadcastService;
 
-    @Override
-    public EventUpdate createEventUpdate(EventUpdate eventUpdate) {
-        return eventUpdateRepository.save(eventUpdate);
+    public EventUpdateServiceImpl(EventUpdateRepository eventUpdateRepository,
+                                  EventRepository eventRepository,
+                                  BroadcastService broadcastService) {
+        this.eventUpdateRepository = eventUpdateRepository;
+        this.eventRepository = eventRepository;
+        this.broadcastService = broadcastService;
     }
 
     @Override
-    public List<EventUpdate> getAllEventUpdates() {
+    public EventUpdate publishUpdate(EventUpdate update) {
+        EventUpdate saved = eventUpdateRepository.save(update);
+        broadcastService.broadcastUpdate(saved.getId());
+        return saved;
+    }
+
+    @Override
+    public List<EventUpdate> getUpdatesForEvent(Long eventId) {
+        return eventUpdateRepository.findByEventId(eventId);
+    }
+
+    @Override
+    public Optional<EventUpdate> getUpdateById(Long id) {
+        return eventUpdateRepository.findById(id);
+    }
+
+    @Override
+    public List<EventUpdate> getAllUpdates() {
         return eventUpdateRepository.findAll();
-    }
-
-    @Override
-    public EventUpdate getEventUpdateById(Long id) {
-        return eventUpdateRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Event update not found"));
     }
 }
