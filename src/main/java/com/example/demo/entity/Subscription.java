@@ -1,39 +1,22 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.*;
+import java.time.Instant;
 
-@Entity
 public class Subscription {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
     private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "event_id")
     private Event event;
+    private Instant subscribedAt;
 
-    // ✅ Default constructor
-    public Subscription() {}
-
-    // ✅ Parameterized constructor
-    public Subscription(Long id, User user, Event event) {
-        this.id = id;
-        this.user = user;
-        this.event = event;
+    public void onCreate() {
+        subscribedAt = Instant.now();
     }
 
-    // ✅ REQUIRED getters/setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
-    public User getUser() { return user; }
-    public void setUser(User user) { this.user = user; }
-
-    public Event getEvent() { return event; }
-    public void setEvent(Event event) { this.event = event; }
+    public Long getId(){ return id;}
+    public void setId(Long id){ this.id=id;}
+    public User getUser(){ return user;}
+    public void setUser(User u){ this.user=u;}
+    public Event getEvent(){ return event;}
+    public void setEvent(Event e){ this.event=e;}
+    public Instant getSubscribedAt(){ return subscribedAt;}
 }

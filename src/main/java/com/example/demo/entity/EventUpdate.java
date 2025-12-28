@@ -1,48 +1,24 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.*;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
-@Entity
 public class EventUpdate {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "event_id")
     private Event event;
+    private Instant timestamp;
+    private SeverityLevel severityLevel;
 
-    private String updateMessage;
-    private LocalDateTime timestamp;
-
-    // ✅ Default constructor
-    public EventUpdate() {}
-
-    // ✅ Parameterized constructor
-    public EventUpdate(Long id, Event event,
-                       String updateMessage, LocalDateTime timestamp) {
-        this.id = id;
-        this.event = event;
-        this.updateMessage = updateMessage;
-        this.timestamp = timestamp;
+    public void onCreate() {
+        timestamp = Instant.now();
+        if(severityLevel == null) severityLevel = SeverityLevel.LOW;
     }
 
-    // ✅ REQUIRED methods
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
-
-    public Event getEvent() { return event; }
-    public void setEvent(Event event) { this.event = event; }
-
-    public String getUpdateMessage() { return updateMessage; }
-    public void setUpdateMessage(String updateMessage) {
-        this.updateMessage = updateMessage;
-    }
-
-    public LocalDateTime getTimestamp() { return timestamp; }
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
-    }
+    // getters & setters
+    public Long getId(){ return id;}
+    public void setId(Long id){ this.id=id;}
+    public Event getEvent(){ return event;}
+    public void setEvent(Event e){ this.event=e;}
+    public Instant getTimestamp(){ return timestamp;}
+    public SeverityLevel getSeverityLevel(){ return severityLevel;}
+    public void setSeverityLevel(SeverityLevel s){ this.severityLevel=s;}
 }
