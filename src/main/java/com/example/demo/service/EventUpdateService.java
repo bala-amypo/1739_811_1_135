@@ -1,17 +1,8 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.EventUpdate;
-
-import java.util.List;
-import java.util.Optional;
+import com.example.demo.entity.*;
+import java.util.*;
 
 public interface EventUpdateService {
-
-    EventUpdate publishUpdate(EventUpdate update);
-
-    List<EventUpdate> getUpdatesForEvent(Long eventId);
-
-    Optional<EventUpdate> getUpdateById(Long id);
-
-    List<EventUpdate> getAllUpdates();
+    List<EventUpdate> getUpdatesForEvent(Long id);
 }
