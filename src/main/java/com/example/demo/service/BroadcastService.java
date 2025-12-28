@@ -9,8 +9,7 @@ public interface BroadcastService {
 
     List<BroadcastLog> getLogsForUpdate(Long updateId);
 
-    // REQUIRED BY CONTROLLER
-    List<BroadcastLog> getAllLogs();
+    List<BroadcastLog> getAllLogs();   // REQUIRED by controller
 
-    void recordDelivery(Long updateId, Long subscriberId, boolean successful);
+    void recordDelivery(Long updateId, Long subscriberId, boolean success);
 }

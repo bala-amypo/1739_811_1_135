@@ -9,10 +9,5 @@ public interface EventUpdateService {
 
     EventUpdate getById(Long id);
 
-    List<EventUpdate> getUpdatesForEvent(Long eventId);
-
-    // REQUIRED BY CONTROLLER
     List<EventUpdate> getAllUpdates();
-
-    EventUpdate getUpdateById(Long id);
 }

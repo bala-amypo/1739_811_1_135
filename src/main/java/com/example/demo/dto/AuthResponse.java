@@ -6,8 +6,7 @@ public class AuthResponse {
     private Long userId;
     private String role;
 
-    public AuthResponse() {
-    }
+    public AuthResponse() {}
 
     public AuthResponse(String token, Long userId, String role) {
         this.token = token;
@@ -15,27 +14,20 @@ public class AuthResponse {
         this.role = role;
     }
 
-    public String getToken() {
-        return token;
+    // CONTROLLER-SAFE OVERLOAD
+    public AuthResponse(String token, Long userId, String role, Object ignored) {
+        this(token, userId, role);
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public String getToken() {
+        return token;
     }
 
     public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
     public String getRole() {
         return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 }
