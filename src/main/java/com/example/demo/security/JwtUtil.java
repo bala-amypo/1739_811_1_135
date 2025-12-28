@@ -8,22 +8,15 @@ import java.util.Date;
 
 public class JwtUtil {
 
-    private final String secret;
-    private final long expirationMs;
+    private final String secret = "secret123";
 
-    public JwtUtil(String secret, long expirationMs) {
-        this.secret = secret;
-        this.expirationMs = expirationMs;
-    }
-
-    // ✔ REQUIRED BY TESTCASE
     public String generateToken(Long userId, String email, String role) {
         return Jwts.builder()
                 .setSubject(email)
                 .claim("userId", userId)
                 .claim("role", role)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + expirationMs))
+                .setExpiration(new Date(System.currentTimeMillis() + 3600000))
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
     }
@@ -37,19 +30,15 @@ public class JwtUtil {
         }
     }
 
-    public String getUsernameFromToken(String token) {
-        return getAllClaims(token).getSubject();
-    }
-
-    public Long getUserIdFromToken(String token) {
-        return getAllClaims(token).get("userId", Long.class);
+    public String getEmailFromToken(String token) {
+        return getClaims(token).getSubject();
     }
 
     public String getRoleFromToken(String token) {
-        return getAllClaims(token).get("role", String.class);
+        return getClaims(token).get("role", String.class);
     }
 
-    private Claims getAllClaims(String token) {
+    private Claims getClaims(String token) {
         return Jwts.parser()
                 .setSigningKey(secret)
                 .parseClaimsJws(token)
