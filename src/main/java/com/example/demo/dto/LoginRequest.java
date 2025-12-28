@@ -1,13 +1,30 @@
 package com.example.demo.dto;
 
-public class UserRegisterRequestDto {
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
+public class RegisterRequest {
+
+    @NotBlank
     private String fullName;
-    private String email;
-    private String password;
-    private String role;
 
-    public UserRegisterRequestDto() {}
+    @NotBlank
+    @Email
+    private String email;
+
+    @NotBlank
+    private String password;
+
+    private String role; // Optional, defaults to SUBSCRIBER in logic
+
+    public RegisterRequest() {}
+
+    public RegisterRequest(String fullName, String email, String password, String role) {
+        this.fullName = fullName;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
 
     public String getFullName() {
         return fullName;
