@@ -1,18 +1,20 @@
 package com.example.demo.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class EventUpdateRequestDto {
 
-    private Long eventId;
+    @NotBlank
     private String message;
 
-    public EventUpdateRequestDto() {}
+    private String severityLevel;
 
-    public Long getEventId() {
-        return eventId;
+    public EventUpdateRequestDto() {
     }
 
-    public void setEventId(Long eventId) {
-        this.eventId = eventId;
+    public EventUpdateRequestDto(String message, String severityLevel) {
+        this.message = message;
+        this.severityLevel = severityLevel;
     }
 
     public String getMessage() {
@@ -21,5 +23,13 @@ public class EventUpdateRequestDto {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getSeverityLevel() {
+        return severityLevel;
+    }
+
+    public void setSeverityLevel(String severityLevel) {
+        this.severityLevel = severityLevel;
     }
 }
