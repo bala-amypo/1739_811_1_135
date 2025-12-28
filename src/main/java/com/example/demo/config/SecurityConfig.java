@@ -1,48 +1,51 @@
-package com.example.demo.security;
+package com.example.demo.config;
 
+import com.example.demo.security.JwtAuthenticationFilter;
+import com.example.demo.security.JwtUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 public class SecurityConfig {
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    private final JwtUtil jwtUtil;
 
-        http
-            .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers(
-                    "/swagger-ui/**",
-                    "/v3/api-docs/**",
-                    "/swagger-resources/**"
-                ).permitAll()
-                .anyRequest().authenticated()
-            )
-            .formLogin(form -> form.permitAll())
-            .logout(logout -> logout.permitAll())
-            .authenticationProvider(authProvider());
-
-        return http.build();
+    public SecurityConfig(JwtUtil jwtUtil) {
+        this.jwtUtil = jwtUtil;
     }
 
     @Bean
-    public UserDetailsService userDetailsService() {
-        return new InMemoryUserDetailsManager(
-            User.withUsername("admin")
-                .password(passwordEncoder().encode("admin123"))
-                .roles("USER")
-                .build()
-        );
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
+        JwtAuthenticationFilter jwtFilter =
+                new JwtAuthenticationFilter(jwtUtil);
+
+        http
+            .csrf(csrf -> csrf.disable())
+            .sessionManagement(session ->
+                    session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers(
+                        "/auth/**",
+                        "/swagger-ui/**",
+                        "/v3/api-docs/**",
+                        "/simple-status"
+                ).permitAll()
+                .requestMatchers("/api/**").authenticated()
+                .anyRequest().permitAll()
+            )
+            .addFilterBefore(jwtFilter,
+                    UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
     }
 
     @Bean
@@ -51,10 +54,8 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationProvider authProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService());
-        provider.setPasswordEncoder(passwordEncoder());
-        return provider;
+    public AuthenticationManager authenticationManager(
+            AuthenticationConfiguration config) throws Exception {
+        return config.getAuthenticationManager();
     }
 }
