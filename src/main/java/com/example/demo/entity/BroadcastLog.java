@@ -13,9 +13,10 @@ public class BroadcastLog {
     @JoinColumn(name = "event_update_id")
     private EventUpdate eventUpdate;
 
+    // 🔴 MUST be named subscriber
     @ManyToOne
     @JoinColumn(name = "subscriber_id")
-    private User user;
+    private User subscriber;
 
     private String deliveryStatus;
 
@@ -24,14 +25,13 @@ public class BroadcastLog {
 
     // ✅ Parameterized constructor
     public BroadcastLog(Long id, EventUpdate eventUpdate,
-                        User user, String deliveryStatus) {
+                        User subscriber, String deliveryStatus) {
         this.id = id;
         this.eventUpdate = eventUpdate;
-        this.user = user;
+        this.subscriber = subscriber;
         this.deliveryStatus = deliveryStatus;
     }
 
-    // ✅ REQUIRED setters (tests call these)
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -40,8 +40,11 @@ public class BroadcastLog {
         this.eventUpdate = eventUpdate;
     }
 
-    public User getUser() { return user; }
-    public void setUser(User user) { this.user = user; }
+    // 🔴 REQUIRED BY SERVICE
+    public User getSubscriber() { return subscriber; }
+    public void setSubscriber(User subscriber) {
+        this.subscriber = subscriber;
+    }
 
     public String getDeliveryStatus() { return deliveryStatus; }
     public void setDeliveryStatus(String deliveryStatus) {
