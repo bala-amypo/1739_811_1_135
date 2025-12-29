@@ -17,7 +17,7 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI() {
 
         Server httpsServer = new Server();
-        httpsServer.setUrl("https://9188.408procr.amypo.ai/");
+        httpsServer.setUrl("https://9286.pro604cr.amypo.ai/");
         httpsServer.setDescription("Amypo HTTPS Server");
 
         // JWT Security Scheme
